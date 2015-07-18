@@ -1,0 +1,42 @@
+<h1>Listing Items</h1>
+
+<table border='1'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Seller</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name, item %></td>
+        <td><%= item.description %></td>
+        <td><%= item.price %></td>
+        <td><%= item.user.name %></td>
+        
+        <% if can? :update, item %>
+          <td>
+            <%= link_to 'Edit', edit_item_path(item) %>
+          </td>
+        <% end %>
+
+        <% if can? :destroy, item %>
+          <td>
+            <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if can? :create, Item %>
+  <%= link_to 'New Item', new_item_path %>
+<% end %>
