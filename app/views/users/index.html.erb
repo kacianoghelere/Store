@@ -1,30 +1,41 @@
-<h1>Listing Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Role</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
+<div class="page-header">
+  <h1>Users</h1>
+</div>
+<div class="wraper">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.role.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, 
-                                    data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th colspan="3" width="10%"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.role.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to link_icon('new-window', ''), user,
+                                                class: "btn btn-default btn-sm" %>
+          </td>
+          <td>
+            <%= link_to link_icon('edit', ''), edit_user_path(user),
+                                                   class: "btn btn-info btn-sm" %>
+          </td>
+          <td>
+            <%= link_to link_icon('remove', ''), user, method: :delete, 
+                                                data: { confirm: 'Are you sure?' },
+                                                class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</div>
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to link_icon('plus', 'New User'), new_user_path, class: "btn btn-default" %>

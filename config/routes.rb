@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   scope "/admin" do
     resources :users
+    resources :roles
   end
   resources :items
-  resources :roles
 
   authenticated :user do
     root :to => 'items#index', as: :authenticated_root
