@@ -8,34 +8,30 @@
         <th>Name</th>
         <th>Role</th>
         <th>Email</th>
-        <th colspan="3" width="10%"></th>
+        <th colspan="2" width="10%"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= user.name %></td>
+          <td><%= link_to user.name, user %></td>
           <td><%= user.role.name %></td>
           <td><%= user.email %></td>
           <td>
-            <%= link_to link_icon('new-window', ''), user,
-                                                class: "btn btn-default btn-sm" %>
-          </td>
-          <td>
             <%= link_to link_icon('edit', ''), edit_user_path(user),
-                                                   class: "btn btn-info btn-sm" %>
+                                                 class: "btn btn-info btn-sm" %>
           </td>
           <td>
             <%= link_to link_icon('remove', ''), user, method: :delete, 
-                                                data: { confirm: 'Are you sure?' },
-                                                class: "btn btn-danger btn-sm" %>
+                                            data: { confirm: 'Are you sure?' },
+                                            class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>  
 </div>
-<br>
-
-<%= link_to link_icon('plus', 'New User'), new_user_path, class: "btn btn-default" %>
+<% if can? :create, User %>
+  <%= link_to link_icon('plus', 'New User'), new_user_path, class: btn_create %>
+<% end %>

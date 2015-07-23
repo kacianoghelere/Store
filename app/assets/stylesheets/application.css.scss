@@ -14,6 +14,11 @@
  *require_self
  */
 @import "bootstrap-sprockets";
+/* Import cerulean variables 
+@import "bootswatch/lumen/variables"; */
 @import "bootstrap";
-@import "bootstrap/theme";
+@import "bootstrap/theme"; 
+/* And finally bootswatch style itself 
+@import "bootswatch/lumen/bootswatch"; */
+
 @import "bootstrap-custom";
