@@ -1,4 +1,5 @@
-<%= form_for(@item) do |f| %>
+<%= form_for(@item, html: {class: "form-horizontal"}) do |f| %>
+
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -11,19 +12,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+
+  <div class="form-group">
+    <%= f.label :description, class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+
+  <div class="form-group">
+    <%= f.label :price, class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.number_field :price, class: "form-control", :step => 'any' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <div class="form-group">
+    <div class="row well well-sm">
+      <%= f.submit "Create", class: btn_create("col-sm-offset-4") %>
+      <%= button_tag link_icon("trash", "Clear"), type: :reset, 
+                                      class: btn_show %>
+    </div>
+  </div>  
+
 <% end %>

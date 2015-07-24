@@ -1,6 +1,8 @@
-<h1>Editing Role</h1>
-
+<%= provide(:title, "Editing #{@role.name}") %>
 <%= render 'form' %>
 
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+<div class="row row-margin">
+	<%= link_to link_icon('arrow-left', 'Back'), roles_path, 
+																								class: btn_show('left') %>
+	<%= link_to link_icon('user', 'Show'), @role, class: btn_show('right') %>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   get 'welcome/index'
 
   devise_for :users
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
   resources :items
 
   authenticated :user do
-    root :to => 'items#index', as: :authenticated_root
+    root :to => 'home#index', as: :authenticated_root
   end
   root :to => 'welcome#index'
 

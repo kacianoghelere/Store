@@ -1,3 +1,7 @@
+<%= provide(:title, 'New Role') %>
+
 <%= render 'form' %>
 
-<%= link_to 'Back', roles_path %>
+<div class="row row-margin">
+	<%= link_to link_icon('arrow-left', 'Back'), roles_path, class: btn_show %>
+</div>

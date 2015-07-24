@@ -1,32 +1,39 @@
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<%= provide(:title, @user.name) %>
 
-<p>
-  <strong>Role:</strong>
-  <%= @user.role.name %>
-</p>
+<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<div class="row content_info">
 
-<p>
-  <strong>Joined on:</strong>
-  <%= @joined_on %>
-</p>
 
-<p>
-  <strong>Last logged in on:</strong>
-  <%= @last_login %>
-</p>
+  <div class="row">
+    <strong>Role:</strong>
+    <%= @user.role.name %>
+  </div>
 
-<p>
-  <strong>No. times logged in:</strong>
-  <%= @user.sign_in_count %>
-</p>
+  <div class="row">
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <div class="row">
+    <strong>Joined on:</strong>
+    <%= @joined_on %>
+  </div>
+
+  <div class="row">
+    <strong>Last logged in on:</strong>
+    <%= @last_login %>
+  </div>
+
+  <div class="row">
+    <strong>No. times logged in:</strong>
+    <%= @user.sign_in_count %>
+  </div>
+</div>
+
+<div class="row row-margin">
+  <%= link_to link_icon('arrow-left', 'Back'), users_path, 
+                                                  class: btn_show('left')  %>
+  <%= link_to link_icon('edit', 'Edit'), edit_user_path(@user), 
+                                                  class: btn_show('right') %>
+</div>

@@ -1,6 +1,10 @@
-<h1>Editing Item</h1>
+<%= provide(:title, "Editing #{@item.name}") %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %>
+<div class="row row-margin">
+	<%= link_to link_icon('arrow-left', 'Back'), items_path, 
+												class: btn_show('left') %>
+	<%= link_to link_icon('gift', 'Show'), @item, 
+												class: btn_show('right') %>
+</div>

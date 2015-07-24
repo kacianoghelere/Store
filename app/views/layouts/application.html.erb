@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <title>Store</title>
+	  <title><%= full_title(yield(:title)) %></title>
 	  <%= stylesheet_link_tag    'application', media: 'all', 
 	  														'data-turbolinks-track' => true %>
 	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-    <%= render 'layouts/header' %>
+  	<% if user_signed_in? %>
+			<div class="side">
+				<%= render 'layouts/sidebar' %>
+			</div>
+			<div class="authenticated">
+	    	<%= render 'layouts/header' %>
+				<div class="content">	
+		  	  <% flash.each do |type, message| %>
+			      <%= content_tag(:div, message, class: "alert alert-#{type}") %>
+		    	<% end %>		
+		    	
+					<div class="container">
+						<div class="page-header">
+							<h2><%= yield(:title) %></h2>
+						</div>
+						<div class="wraper">
+							<%= yield %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% else %>	
+			<div class="non_authenticated">  		
+				<%= render 'layouts/header' %>
+	  	  <% flash.each do |type, message| %>
+		      <%= content_tag(:div, message, class: "alert alert-#{type}") %>
+	    	<% end %>
 
-		<% flash.each do |name, msg| %>
-		  <%= content_tag :div, msg, id: "flash_#{name}" %>
-		<% end %>
-
-		<div class="container">
-			<%= yield %>
-		</div>
+				<div class="container">
+					<div class="content">
+						<%= yield %>
+					</div>
+				</div>
+			</div>
+		<% end %>	
 
 	</body>
 </html>

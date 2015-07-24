@@ -1,22 +1,27 @@
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
+<%= provide(:title, @item.name) %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @item.description %>
-</p>
+<div class="row content_info">
 
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
+  <div class="row">
+    <strong>Description:</strong>
+    <%= @item.description %>
+  </div>
 
-<p>
-  <strong>Seller:</strong>
-  <%= @item.user.name %>
-</p>
+  <div class="row">
+    <strong>Price:</strong>
+    <%= @item.price %>
+  </div>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+  <div class="row">
+    <strong>Seller:</strong>
+    <%= link_to @item.user.name, @item.user %>
+  </div>
+  
+</div>
+
+<div class="row row-margin">
+  <%= link_to link_icon('arrow-left', 'Back'), items_path, 
+                                                class: btn_show('left') %>
+  <%= link_to link_icon('edit', 'Edit'), edit_item_path(@item), 
+                                                  class: btn_show('right') %>
+</div>

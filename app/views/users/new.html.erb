@@ -1,5 +1,6 @@
-<h1>New User</h1>
-
+<%= provide(:title, 'New User') %>
 <%= render 'form' %>
 
-<%= link_to 'Back', users_path %>
+<div class="row row-margin">
+	<%= link_to link_icon('arrow-left', 'Back'), users_path, class: btn_show %>
+</div>

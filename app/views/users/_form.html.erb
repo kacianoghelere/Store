@@ -1,7 +1,11 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, html: {class: "form-horizontal"}) do |f| %>
+
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> 
+        prohibited this user from being saved:
+      </h2>
 
       <ul>
       <% @user.errors.full_messages.each do |message| %>
@@ -11,27 +15,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-offset-3 col-sm-1 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+  <div class="form-group">
+    <%= f.label :password, class: "col-sm-offset-3 col-sm-1 control-label" %>      
+    <div class="col-sm-4">
+      <%= f.password_field :password, autocomplete: "off", 
+                                                      class: "form-control" %>
+      <% if @minimum_password_length %>
+        <p class="help-block">
+          (<%= @minimum_password_length %> characters minimum)
+        </p>
+      <% end %>                                                        
+    </div>                                                     
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password, placeholder: "Leave blank if unchanged" %>
+  <div class="form-group">
+    <%= f.label :password_confirmation, 'Confirmation', 
+                            class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.password_field :password_confirmation, autocomplete: "off", 
+                                                      class: "form-control" %>
+    </div>
   </div>
   
-  <div class="field">
-    <%= f.label :role_id %><br>
-    <%= collection_select(:user, :role_id, Role.all, :id, :name, {prompt: true}) %>
+  <div class="form-group">
+    <%= f.label :role_id, "Role", 
+                            class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= collection_select(:user, :role_id, Role.all, :id, :name, 
+                                    {prompt: true}, class: "form-control") %>
+    </div>                                                              
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="row well well-sm">
+      <%= f.submit "Create", class: btn_create("col-sm-offset-4") %>
+      <%= button_tag link_icon("trash", "Clear"), type: :reset, 
+                                      class: btn_show %>
+    </div>
   </div>
 <% end %>

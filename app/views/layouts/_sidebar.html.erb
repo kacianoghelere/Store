@@ -1,0 +1,32 @@
+<div class="nav-side-menu">
+  <div class="brand">
+    <strong>Store</strong>
+  </div>
+  <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" 
+    data-target="#menu-content"></i>  
+  <div class="menu-list">
+    <ul id="menu-content" class="menu-content collapse out">    
+
+      <li><%= sidebar_link 'home', 'Home', authenticated_root_path %></li>
+
+      <% if can? :read, Item %>
+        <li><%= sidebar_link 'gift', 'Items', items_path %></li>
+      <% end %>
+            
+      <% if (can? :manage, User) || (can? :manage, Roles) %>
+        <li data-toggle="collapse" data-target="#new" class="collapsed">
+          <%= sidebar_link 'wrench', 'Management' %>
+        </li>
+        <ul class="sub-menu collapse" id="new">
+          <% if can? :manage, User %>
+            <li><%= sidebar_link 'user', 'Users', users_path %></li>            
+          <% end %>
+          <% if can? :manage, Role %>
+            <li><%= sidebar_link 'briefcase', 'Roles', roles_path %></li>            
+          <% end %>      
+        </ul>
+      <% end %>
+
+    </ul>
+  </div>
+</div>

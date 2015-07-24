@@ -1,39 +1,35 @@
-<div class="page-header">
-  <center><h1>Log in</h1></center>
-</div>
-<div class="wraper">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), 
-                                    html: {class: "form-horizontal"}) do |f| %>
+<%= provide(:title, 'Log in') %>
 
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), 
+                                  html: {class: "form-horizontal"}) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :email, class: "col-sm-offset-3 col-sm-1 control-label" %>
+    <div class="col-sm-4">
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, class: "col-sm-offset-3 col-sm-1 control-label" %>
+    <div class="col-sm-4">
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
     <div class="form-group">
-      <%= f.label :email, class: "col-sm-offset-3 col-sm-1 control-label" %>
-      <div class="col-sm-4">
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      <div class="col-sm-offset-4">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
       </div>
     </div>
+  <% end -%>
 
-    <div class="form-group">
-      <%= f.label :password, class: "col-sm-offset-3 col-sm-1 control-label" %>
-      <div class="col-sm-4">
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
+  <div class="form-group">
+    <div class="row well well-sm">
+      <%= f.submit "Log in", class: "col-sm-offset-4 btn btn-primary btn-md" %>
+      <%= render "devise/shared/links" %>
     </div>
-
-    <% if devise_mapping.rememberable? -%>
-      <div class="form-group">
-        <div class="col-sm-offset-4">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      </div>
-    <% end -%>
-
-    <div class="form-group">
-      <div class="row well well-sm">
-        <%= f.submit "Log in", class: "col-sm-offset-4 btn btn-primary btn-md" %>
-        <%= render "devise/shared/links" %>
-      </div>
-    </div>
-  <% end %>
-
-</div>
+  </div>
+<% end %>

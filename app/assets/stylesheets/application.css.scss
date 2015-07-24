@@ -14,11 +14,11 @@
  *require_self
  */
 @import "bootstrap-sprockets";
-/* Import cerulean variables 
-@import "bootswatch/lumen/variables"; */
+/* Import cerulean variables */
+@import "bootswatch/yeti/variables"; 
 @import "bootstrap";
-@import "bootstrap/theme"; 
-/* And finally bootswatch style itself 
-@import "bootswatch/lumen/bootswatch"; */
+/*@import "bootstrap/theme"; */
+/* And finally bootswatch style itself */
+@import "bootswatch/yeti/bootswatch"; 
 
 @import "bootstrap-custom";

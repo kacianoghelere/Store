@@ -1,19 +1,28 @@
+<%= provide(:title, @role.name) %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @role.name %>
-</p>
+<div class="row content_info">
+  <div class="row">
+	  <strong>Name:</strong>
+	  <%= @role.name %>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @role.description %>
-</p>
+  <div class="row">
+	  <strong>Description:</strong>
+	  <%= @role.description %>
+  </div>
 
-<p>
-  <strong>Assosciated users:</strong>
-  <%= @assosciated_users %>
-</p>
+  <div class="row">
+	  <strong>Assosciated users:</strong>
+	  <%= @assosciated_users %>
+  </div>
 
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>
+</div>
+
+<div class="row row-margin">
+  <%= link_to link_icon('arrow-left', 'Back'), roles_path, 
+                                                	class: btn_show('left')  %>
+  <%= link_to link_icon('edit', 'Edit'), edit_role_path(@role), 
+                                                  class: btn_show('right') %>
+</div>

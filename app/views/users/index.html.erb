@@ -1,37 +1,37 @@
-<div class="page-header">
-  <h1>Users</h1>
-</div>
-<div class="wraper">
-  <table class="table table-hover table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Email</th>
-        <th colspan="2" width="10%"></th>
-      </tr>
-    </thead>
+<%= provide(:title, 'Users') %>
 
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to user.name, user %></td>
-          <td><%= user.role.name %></td>
-          <td><%= user.email %></td>
-          <td>
-            <%= link_to link_icon('edit', ''), edit_user_path(user),
-                                                 class: "btn btn-info btn-sm" %>
-          </td>
-          <td>
-            <%= link_to link_icon('remove', ''), user, method: :delete, 
-                                            data: { confirm: 'Are you sure?' },
-                                            class: "btn btn-danger btn-sm" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>  
+<table class="table table-hover table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th colspan="2" width="10%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, user %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role.name %></td>
+        <td>
+          <%= link_to link_icon('edit'), edit_user_path(user),
+                                               class: btn_edit %>
+        </td>
+        <td>
+          <%= link_to link_icon('remove'), user, method: :delete, 
+                                          data: { confirm: 'Are you sure?' },
+                                          class: btn_destroy %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  
+
+<div class="row row-margin">
+  <% if can? :manage, User %>
+    <%= link_to link_icon('plus', 'New User'), new_user_path, 
+                                                          class: btn_create %>
+  <% end %>
 </div>
-<% if can? :create, User %>
-  <%= link_to link_icon('plus', 'New User'), new_user_path, class: btn_create %>
-<% end %>
