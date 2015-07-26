@@ -1,0 +1,40 @@
+<div class="row row-margin">
+  <ul class="items-list">
+    <% @items.each do |item| %>
+      <li>      
+        <div class="row">
+          <div class="col-sm-12">
+            <h4><strong><%= link_to item.name, item %></strong></h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-10">
+            <strong>Seller:</strong> <%= item.user.name %>
+          </div>
+          <div class="col-sm-2">
+            <strong>Price:</strong> <%= item.price %>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-12">
+            <strong>Description:</strong> <%= item.description %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <% if can? :update, item %>
+              <%= link_to link_icon('edit', 'Edit'), edit_item_path(item), class: btn_edit %>            
+            <% end %>
+            <% if can? :destroy, item %>            
+              <%= link_to link_icon('remove', 'Destroy'), item, method: :delete, 
+                                    data: { confirm: 'Are you sure?' }, class: btn_destroy %>            
+            <% end %>
+          </div>          
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

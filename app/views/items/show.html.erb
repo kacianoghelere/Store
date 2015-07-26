@@ -22,6 +22,13 @@
 <div class="row row-margin">
   <%= link_to link_icon('arrow-left', 'Back'), items_path, 
                                                 class: btn_show('left') %>
-  <%= link_to link_icon('edit', 'Edit'), edit_item_path(@item), 
-                                                  class: btn_show('right') %>
+  <% if can? :update, @item %>
+    <%= link_to link_icon('edit', 'Edit'), edit_item_path(@item), 
+                                                  class: btn_edit('right') %>
+  <% end %>
+  <% if can? :destroy, @item %>
+    <%= link_to link_icon('remove', 'Destroy'), @item, method: :delete, 
+                                            data: { confirm: 'Are you sure?' },
+                                            class: btn_destroy('right') %>
+  <% end %>
 </div>

@@ -1,40 +1,28 @@
 <%= provide(:title, 'Items') %>
 
-<table class="table table-hover table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Seller</th>
-      <th colspan="2" width="10%"></th>
-    </tr>
-  </thead>
+<div>
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= link_to item.name, item %></td>
-        <td><%= item.description %></td>
-        <td><%= item.price %></td>
-        <td><%= item.user.name %></td>          
-        <% if can? :update, item %>
-          <td>
-            <%= link_to link_icon('edit', ''), edit_item_path(item), 
-                                                class: btn_edit %>
-          </td>
-        <% end %>
-        <% if can? :destroy, item %>
-          <td>
-            <%= link_to link_icon('remove', ''), item, method: :delete, 
-                                          data: { confirm: 'Are you sure?' },
-                                          class: btn_destroy %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#list" aria-controls="list" role="tab" data-toggle="tab">
+        <%= link_icon('list', 'List') %>
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#table" aria-controls="table" role="tab" data-toggle="tab">
+        <%= link_icon('list-alt', 'Table') %>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="list"><%= render 'list' %></div>
+    <div role="tabpanel" class="tab-pane" id="table"><%= render 'table' %></div>    
+  </div>
+
+</div>
 
 <% if can? :create, Item %>
   <%= link_to link_icon('plus', 'New Item'), new_item_path, class: btn_create %>

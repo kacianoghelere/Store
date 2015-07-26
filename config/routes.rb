@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
-
   get 'welcome/index'
+  get '/admin' => 'welcome#index'
 
   devise_for :users
   scope "/admin" do
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root :to => 'home#index', as: :authenticated_root
+    get '/admin' => 'home#index'
   end
   root :to => 'welcome#index'
 

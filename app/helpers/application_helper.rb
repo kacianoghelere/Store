@@ -2,6 +2,9 @@ module ApplicationHelper
 
 	def full_title(title)
 		title ||= 'Home'
+		if title.blank?
+			title = 'Home'
+		end
 		"#{title} | Store"
 	end
 

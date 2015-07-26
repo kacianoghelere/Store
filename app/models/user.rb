@@ -13,15 +13,15 @@ class User < ActiveRecord::Base
 	end
 
   def admin?
-    self.role.name == "Admin"
+    self.role.admin?
   end
 
-  def seller?
-    self.role.name == "Seller"
+  def manager?
+    self.role.manager?
   end
 
   def regular?
-    self.role.name == "Regular"
+    !self.role.admin? && self.role.manager?
   end
   
 end
