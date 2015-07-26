@@ -28,7 +28,6 @@ class Ability
     elsif user.regular?
       can :read, Item    
       can :read, User, :id => user.id
-
     end
   end
 
