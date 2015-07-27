@@ -1,0 +1,27 @@
+<%= provide(:title, @menu.name) %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+	<strong>Parent:</strong>
+	<%= @menu.get_parent %>
+</div>
+
+<div class="row">
+	<strong>Icon:</strong>
+	<%= link_icon(@menu.icon, @menu.icon) %>
+</div>
+
+<div class="row">
+	<strong>Children:</strong>
+	<%= @children_menus %>
+</div>
+
+<div class="row row-margin">
+  <%= link_to link_icon('arrow-left', 'Back'), menus_path, 
+                                                  class: btn_show('left')  %>
+  <% if can? :update, Menu %>
+    <%= link_to link_icon('edit', 'Edit'), edit_menu_path(@menu), 
+                                                  class: btn_show('right') %>
+  <% end %>
+</div>

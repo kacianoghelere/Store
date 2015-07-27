@@ -1,0 +1,27 @@
+<%= provide(:title, @page.name) %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+	<strong>Menu:</strong>
+	<%= @page.get_parent %>
+</div>
+
+<div class="row">
+	<strong>Icon:</strong>
+	<%= link_icon(@page.icon, @page.icon) %>
+</div>
+
+<div class="row">
+	<strong>Path:</strong>
+	<%= @page.path %>
+</div>
+
+<div class="row row-margin">
+  <%= link_to link_icon('arrow-left', 'Back'), pages_path, 
+                                                  class: btn_show('left')  %>
+  <% if can? :update, Page %>
+    <%= link_to link_icon('edit', 'Edit'), edit_page_path(@page), 
+                                                  class: btn_show('right') %>
+  <% end %>
+</div>

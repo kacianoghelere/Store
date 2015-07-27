@@ -1,0 +1,53 @@
+<%= form_for(@page, html: {class: "form-horizontal"}) do |f| %>
+
+  <% if @page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+      <ul>
+      <% @page.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :name, autofocus: true, class: "form-control input-sm" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :icon, class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :icon, class: "form-control input-sm" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :path, class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :path, class: "form-control input-sm" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :menu_id, "Role", 
+                            class: "col-sm-offset-2 col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= collection_select(:menu, :menu_id, Menu.all, :id, :name, 
+                            {prompt: true}, class: "form-control input-sm") %>
+    </div>                                                              
+  </div>
+
+  <div class="form-group">
+    <div class="row well well-sm">
+      <%= f.submit "Save", class: btn_create("col-sm-offset-4") %>
+      <%= button_tag link_icon("trash", "Clear"), type: :reset, 
+                                      class: btn_show %>
+    </div>
+  </div>  
+
+<% end %>

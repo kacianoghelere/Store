@@ -1,0 +1,9 @@
+<%= provide(:title, "Editing #{@page.name}") %>
+
+<%= render 'form' %>
+
+<div class="row row-margin">
+	<%= link_to link_icon('arrow-left', 'Back'), pages_path, 
+												class: btn_show('left') %>
+	<%= link_to link_icon('list', 'Show'), @page, class: btn_show('right') %>
+</div>

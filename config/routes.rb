@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pages
+  resources :menus
   get 'home/index'
   get 'welcome/index'
   get '/admin' => 'welcome#index'

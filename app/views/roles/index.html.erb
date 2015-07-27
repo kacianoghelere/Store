@@ -1,4 +1,5 @@
 <%= provide(:title, 'Roles') %>
+<p id="notice"><%= notice %></p>
 
 <div class="col-sm-12">
   <table class="table table-hover table-bordered table-striped table-resposive">
@@ -20,8 +21,8 @@
           </td>
           <td>
             <%= link_to link_icon('remove'), role, method: :delete, 
-                                                            data: { confirm: 'Are you sure?' },
-                                                            class: btn_destroy %>
+                                          data: { confirm: 'Are you sure?' },
+                                          class: btn_destroy %>
           </td>
         </tr>
       <% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  icon: MyString
+  path: MyString
+  menu_id: 
+
+two:
+  name: MyString
+  icon: MyString
+  path: MyString
+  menu_id: 

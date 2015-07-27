@@ -1,0 +1,44 @@
+<%= provide(:title, 'Pages') %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="col-sm-12">
+  <table class="table table-hover table-bordered table-striped table-resposive">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Path</th>
+        <th>Menu</th>
+        <th colspan="2" width="10%"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @pages.each do |page| %>
+        <tr>
+          <td><%= link_to page.name, page %></td>
+          <td><%= page.icon %></td>
+          <td><%= page.path %></td>
+          <td><%= page.get_parent %></td>
+          <td>
+            <%= link_to link_icon('edit'), edit_page_path(page), 
+                                            class: btn_edit %>
+          </td>
+          <td>
+            <%= link_to link_icon('remove'), page, method: :delete, 
+                                            data: { confirm: 'Are you sure?' },
+                                            class: btn_destroy %>
+          </td>                                      
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row row-margin">
+  <% if can? :manage, Page %>
+    <%= link_to link_icon('plus', 'New Page'), new_page_path, 
+                                                class: btn_create %>
+  <% end %>
+</div>
