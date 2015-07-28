@@ -48,25 +48,25 @@ u4 = User.create({
 
 i1 = Item.create({
 	name: Faker::Commerce.product_name, 
-	description: Faker::Lorem.sentences(1), 
+	description: Faker::Lorem.sentence, 
 	price: Faker::Commerce.price, 
 	user_id: u2.id
 })
 i2 = Item.create({
 	name: Faker::Commerce.product_name, 
-	description: Faker::Lorem.sentences(1), 
+	description: Faker::Lorem.sentence, 
 	price: Faker::Commerce.price, 
 	user_id: u2.id
 })
 i3 = Item.create({
 	name: Faker::Commerce.product_name, 
-	description: Faker::Lorem.sentences(1), 
+	description: Faker::Lorem.sentence, 
 	price: Faker::Commerce.price, 
 	user_id: u3.id
 })
 i4 = Item.create({
 	name: Faker::Commerce.product_name, 
-	description: Faker::Lorem.sentences(1), 
+	description: Faker::Lorem.sentence, 
 	price: Faker::Commerce.price, 
 	user_id: u3.id
 })
