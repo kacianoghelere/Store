@@ -2,7 +2,7 @@ module ApplicationHelper
 
 	def full_title(title)
 		title ||= 'Home'
-		if title.blank?
+		if title.empty? || title.blank? 
 			title = 'Home'
 		end
 		"#{title} | Store"
@@ -27,6 +27,14 @@ module ApplicationHelper
 		"#{prepend} btn btn-primary btn-sm"
 	end
 
+	def btn_login(prepend = '')
+		"#{prepend} btn btn-block btn-success"
+	end
+
+	def btn_signup(prepend = '')
+		"#{prepend} btn btn-block btn-primary"
+	end
+
 	def btn_show(prepend = '')
 		"#{prepend} btn btn-default btn-sm"
 	end
@@ -37,5 +45,11 @@ module ApplicationHelper
 
 	def btn_destroy(prepend = '')
 		"#{prepend} btn btn-danger btn-sm"
+	end
+
+	def user_navigation
+		@navigation = Hash.new
+    accesses = "SELECT page_id FROM role_accesses WHERE role_id = :role_id"
+    Page.where("page_id IN (#{accesses})", role_id: current_user.role)
 	end
 end

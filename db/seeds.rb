@@ -70,3 +70,80 @@ i4 = Item.create({
 	price: Faker::Commerce.price, 
 	user_id: u3.id
 })
+
+m1 = Menu.create({
+	name:      "Administration",
+	icon:      "king",
+	parent_id: nil
+})
+m2 = Menu.create({
+	name:      "Management",
+	icon:      "wrench",
+	parent_id: m1.id
+})
+m3 = Menu.create({
+	name:      "Navigation",
+	icon:      "wrench",
+	parent_id: m1.id
+})
+
+p1 = Page.create({
+	name:    "Roles",
+	icon:    "briefcase",
+	path:    "roles_path",
+	menu_id: m2.id
+})
+p2 = Page.create({
+	name:    "Users",
+	icon:    "user",
+	path:    "users_path",
+	menu_id: m2.id
+})
+p3 = Page.create({
+	name:    "Menus",
+	icon:    "tasks",
+	path:    "menus_path",
+	menu_id: m3.id
+})
+p4 = Page.create({
+	name:    "Pages",
+	icon:    "file",
+	path:    "pages_path",
+	menu_id: m3.id
+})
+
+ra1 = Access.create({
+	role_id:     r3.id, 
+	page_id:     p1.id, 
+	can_create:  true, 
+	can_update:  true, 
+	can_read:    true, 
+	can_destroy: true
+})
+
+ra2 = Access.create({
+	role_id:     r3.id, 
+	page_id:     p2.id, 
+	can_create:  true, 
+	can_update:  true, 
+	can_read:    true, 
+	can_destroy: true
+})
+
+ra3 = Access.create({
+	role_id:     r3.id, 
+	page_id:     p3.id, 
+	can_create:  true, 
+	can_update:  true, 
+	can_read:    true, 
+	can_destroy: true
+})
+
+ra4 = Access.create({
+	role_id:     r3.id, 
+	page_id:     p4.id, 
+	can_create:  true, 
+	can_update:  true, 
+	can_read:    true, 
+	can_destroy: true
+})

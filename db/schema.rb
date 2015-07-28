@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727150257) do
+ActiveRecord::Schema.define(version: 20150728171725) do
+
+  create_table "accesses", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "page_id"
+    t.boolean  "can_create"
+    t.boolean  "can_read"
+    t.boolean  "can_update"
+    t.boolean  "can_destroy"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "accesses", ["page_id"], name: "index_accesses_on_page_id"
+  add_index "accesses", ["role_id"], name: "index_accesses_on_role_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"

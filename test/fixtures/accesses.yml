@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role_id: 
+  page_id: 
+  can_create: false
+  can_read: false
+  can_update: false
+  can_destroy: false
+
+two:
+  role_id: 
+  page_id: 
+  can_create: false
+  can_read: false
+  can_update: false
+  can_destroy: false

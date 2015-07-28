@@ -26,8 +26,8 @@ class Ability
         other == user
       end
     elsif user.regular?
-      can :read, Item    
-      can :read, User, :id => user.id
+      can :read, Item
+      can :manage, User, user_id: user.id
     end
   end
 

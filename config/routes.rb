@@ -1,6 +1,4 @@
-Rails.application.routes.draw do
-  resources :pages
-  resources :menus
+Rails.application.routes.draw do  
   get 'home/index'
   get 'welcome/index'
   get '/admin' => 'welcome#index'
@@ -9,6 +7,8 @@ Rails.application.routes.draw do
   scope "/admin" do
     resources :users
     resources :roles
+    resources :pages
+    resources :menus
   end
   resources :items
 

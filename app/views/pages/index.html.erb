@@ -18,7 +18,7 @@
       <% @pages.each do |page| %>
         <tr>
           <td><%= link_to page.name, page %></td>
-          <td><%= page.icon %></td>
+          <td><%= link_icon(page.icon, page.icon) %></td>
           <td><%= page.path %></td>
           <td><%= page.get_parent %></td>
           <td>
