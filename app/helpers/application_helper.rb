@@ -76,15 +76,8 @@ module ApplicationHelper
 				if key != :icon && key != :pages
 					html += '<li data-toggle="collapse" data-target="#management" class="collapsed">'
           html += sidebar_link('wrench', 'Management')
-					# html += build_hash(hash[key])
-					debugger
-        	if !hash[key][:pages].empty?
-						hash[key][:pages].each do |page|
-							html += "<li>" 
-							html += sidebar_link( page.icon, page.name, send(page.path)) 
-							html += "</li>"
-						end
-					end
+          #Inicia processo de recurssão
+					html += build_hash(hash[key])				
         	html += '</li>'
 				end
 			end
