@@ -118,6 +118,12 @@ p5 = Page.create({
 	path:    "items_path",
 	menu_id: nil
 })
+p6 = Page.create({
+	name:    "Acesses",
+	icon:    "check",
+	path:    "accesses_path",
+	menu_id: m2.id
+})
 # 
 ra1 = Access.create({
 	role_id:     r3.id, 
@@ -170,6 +176,14 @@ ra6 = Access.create({
 ra7 = Access.create({
 	role_id:     r3.id, 
 	page_id:     p5.id, 
+	can_create:  true, 
+	can_update:  true, 
+	can_read:    true, 
+	can_destroy: true
+})
+ra8 = Access.create({
+	role_id:     r3.id, 
+	page_id:     p6.id, 
 	can_create:  true, 
 	can_update:  true, 
 	can_read:    true, 

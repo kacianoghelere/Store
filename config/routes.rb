@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :roles
     resources :pages
     resources :menus
+    get 'accesses' => 'accesses#index'
+    post 'save_accesses' => 'accesses#create'
   end
   resources :items
 

@@ -23,8 +23,8 @@
     <%= f.label :parent_id, "Role", 
                             class: "col-sm-offset-2 col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= collection_select(:menu, :parent_id, Menu.all, :id, :name, 
-                            {prompt: true}, class: "form-control input-sm") %>
+      <%= collection_select(:menu, :parent_id, Menu.where.not(id: @menu.id), 
+                :id, :name, {prompt: true}, class: "form-control input-sm") %>
     </div>                                                              
   </div>
 

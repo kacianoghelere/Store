@@ -4,13 +4,13 @@
 
 <div class="row content_info">
   <div class="row">
-	  <strong>Name:</strong>
-	  <%= @role.name %>
+    <strong>Name:</strong>
+    <%= @role.name %>
   </div>
 
   <div class="row">
-	  <strong>Description:</strong>
-	  <%= @role.description %>
+    <strong>Description:</strong>
+    <%= @role.description %>
   </div>
 
   <div class="row">
@@ -28,47 +28,46 @@
     </div>
   <% else %>
     <div class="row">
-  	  Doesn't have any privileges
+      Doesn't have any privileges
     </div>
   <% end %>
+</div>
 
-  <div class="row">
-    <div class="col-sm-10">
-      <table class="table table-bordered table-striped table-resposive">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Path</th>
-            <th width="5%">Create</th>
-            <th width="5%">Read</th>
-            <th width="5%">Update</th>
-            <th width="5%">Destroy</th>
-          </tr>
-        </thead>
+<div class="row row-margin">
+  <div class="col-sm-10">
+    <table class="table table-bordered table-striped table-resposive">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Path</th>
+          <th width="5%">Create</th>
+          <th width="5%">Read</th>
+          <th width="5%">Update</th>
+          <th width="5%">Destroy</th>
+        </tr>
+      </thead>
 
-        <tbody>
-          <% @accesses.each do |access| %>
-            <tr>
-              <td><%= link_to access.page.name, access.page %></td>
-              <td><%= access.page.path %></td>
-              <td align="center">
-                <%= render_checkbox "create",  access.can_create  %>
-              </td>
-              <td align="center">
-                <%= render_checkbox "read",    access.can_read    %>
-              </td>
-              <td align="center">
-                <%= render_checkbox "update",  access.can_update  %>
-              </td>
-              <td align="center">
-                <%= render_checkbox "destroy", access.can_destroy %>
-              </td>
-            </tr>
+      <tbody>
+        <% @accesses.each do |access| %>
+          <%= content_tag_for(:tr, access) do |acc| %>
+            <td><%= link_to acc.page.name, acc.page %></td>
+            <td><%= acc.page.path %></td>
+            <td align="center">
+              <%= render_checkbox "create",  acc.can_create  %>
+            </td>
+            <td align="center">
+              <%= render_checkbox "read",    acc.can_read    %>
+            </td>
+            <td align="center">
+              <%= render_checkbox "update",  acc.can_update  %>
+            </td>
+            <td align="center">
+              <%= render_checkbox "destroy", acc.can_destroy %>
+            </td>
           <% end %>
-        </tbody>
-      </table>
-      
-    </div>
+        <% end %>
+      </tbody>
+    </table>      
   </div>
 </div>
 

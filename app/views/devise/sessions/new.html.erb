@@ -13,7 +13,8 @@
   <div class="form-group">
     <%= f.label :password, class: "col-sm-offset-3 col-sm-1 control-label" %>
     <div class="col-sm-4">
-      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      <%= f.password_field :password, autocomplete: "off", 
+                                      class: "form-control" %>
     </div>
   </div>
 
@@ -32,4 +33,5 @@
       <%= render "devise/shared/links" %>
     </div>
   </div>
+  
 <% end %>

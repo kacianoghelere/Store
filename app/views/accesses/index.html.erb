@@ -1,0 +1,90 @@
+<%= provide(:title, 'Acesses') %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="row row-margin">
+  <div class="col-sm-12">
+    <table id="accesses" class="table table-bordered table-resposive">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Page</th>
+          <th>Path</th>
+          <th width="5%">Create</th>
+          <th width="5%">Read</th>
+          <th width="5%">Update</th>
+          <th width="5%">Destroy</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @accesses.each do |access| %>
+          <%= content_tag_for(:tr, access) do |acc| %>
+            <td data-code='<%= acc.role.id %>'>
+            	<%= link_to acc.role.name, acc.role %>
+        		</td>
+            <td data-code='<%= acc.page.id %>'>
+            	<%= link_to acc.page.name, acc.page %>
+          	</td>
+            <td><%= acc.page.path %></td>
+            <td align="center">
+              <%= render_checkbox "create",  acc.can_create,  false %>
+            </td>
+            <td align="center">
+              <%= render_checkbox "read",    acc.can_read,    false %>
+            </td>
+            <td align="center">
+              <%= render_checkbox "update",  acc.can_update,  false %>
+            </td>
+            <td align="center">
+              <%= render_checkbox "destroy", acc.can_destroy, false %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>      
+  </div>
+</div>
+
+<div class="row row-margin">
+  <% if can? :manage, Access %>
+  	<%= form_for(:accesses, url: save_accesses_path) do |f| %>
+    	<%= f.submit 'Save', class: btn_create %>
+    	<%= link_to 'Teste', '#', id: 'frash' %>
+  	<% end %>
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+	$(function (){
+		var getJsonFromTable = function() {
+			var rows = [];
+			$('#accesses tbody tr').each(function(i, n){
+				var $row = $(n);
+				rows.push({
+					access_id: $row.attr('id'),
+					role_id:   $row.find('td:eq(0)').data('code'),
+					page_id:   $row.find('td:eq(1)').data('code'),
+					create:    $row.find('td:eq(3) input[type=checkbox]').prop('checked'), 
+					read:      $row.find('td:eq(4) input[type=checkbox]').prop('checked'), 
+					update:    $row.find('td:eq(5) input[type=checkbox]').prop('checked'), 
+					destroy:   $row.find('td:eq(6) input[type=checkbox]').prop('checked'), 
+				});                
+			});
+			return JSON.stringify(rows);
+    };
+
+    $('#frash').click(function(e) {
+    	console.log(getJsonFromTable());
+    });
+
+    $('form').submit(function(event) {
+    	var table = {"accesses": getJsonFromTable()};
+    	var data = $(this).serialize();
+    	data += '&accesses=' + JSON.stringify(table);
+    	$.post($(this).attr('action'), data, null, "script");
+    	// return false;
+    });
+	});
+</script>

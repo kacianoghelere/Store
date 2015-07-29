@@ -142,7 +142,7 @@ a.link-sm {
 }
 .nav-side-menu .brand {
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  background-color: $gray_darker;  
+  background-color: darken($brand-primary, 10%);
   line-height: 45px;
   display: block;
   text-align: center;
