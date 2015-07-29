@@ -5,28 +5,8 @@
   <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" 
     data-target="#menu-content"></i>  
   <div class="menu-list">
-    <ul id="menu-content" class="menu-content collapse out">    
+    <ul id="menu-content" class="menu-content collapse out">          
 
-      <% if can? :read, Item %>
-        <li><%= sidebar_link 'gift', 'Items', items_path %></li>
-      <% end %>
-            
-      <% if (can? :manage, :all) %>
-        <li data-toggle="collapse" data-target="#management" class="collapsed">
-          <%= sidebar_link 'wrench', 'Management' %>
-        </li>
-        <ul class="sub-menu collapse" id="management">
-          <li><%= sidebar_link 'user', 'Users', users_path %></li>
-          <li><%= sidebar_link 'briefcase', 'Roles', roles_path %></li>          
-        </ul>
-        <li data-toggle="collapse" data-target="#navs" class="collapsed">
-          <%= sidebar_link 'wrench', 'Navigation' %>
-        </li>
-        <ul class="sub-menu collapse" id="navs">
-          <li><%= sidebar_link 'tasks', 'Menus', menus_path %></li>            
-          <li><%= sidebar_link 'file', 'Pages', pages_path %></li>              
-        </ul>
-      <% end %>  
       <%= user_navigation %>      
     </ul>
   </div>

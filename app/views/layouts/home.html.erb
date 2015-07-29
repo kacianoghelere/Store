@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title><%= full_title(yield(:title)) %></title>
+	  <%= stylesheet_link_tag    'application', media: 'all', 
+	  														'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	  <%= favicon_link_tag 'favicon.ico' %>
+	</head>
+	<body>
+  	<!-- if user_signed_in? -->
+		<div class="side">
+			<%= render 'layouts/sidebar' %>
+		</div>
+		<div class="authenticated">
+    	<%= render 'layouts/header' %>
+    	
+			<div class="container">
+				<div class="content">	
+
+					<% flash.each do |type, message| %>
+						<div class="alert alert-info">
+							<button type="button" class="close" 
+								data-dismiss="alert" aria-hidden="true">&times;</button>
+				      <%= content_tag(:div, message) %>
+						</div>
+		    	<% end %> 
+
+					<div class="page-header">			    	
+						<strong><h3><%= yield(:title) %></h3></strong>
+					</div>
+
+					<%= yield %>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

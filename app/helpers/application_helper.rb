@@ -11,13 +11,15 @@ module ApplicationHelper
 
 	# CUSTOM
 	def sidebar_link(icon, text = '', path = '#')
-		("<a href='#{path}'>"+
-				"<i class='glyphicon glyphicon-#{icon}'></i> #{text}"+
-				"</a>").html_safe
+		link_to(link_icon_sidebar(icon, text), path)
 	end
 
 	def link_icon(icon, text = '')
 		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
+	end
+
+	def link_icon_sidebar(icon, text = '')
+		("<i class='glyphicon glyphicon-#{icon}'></i> #{text}").html_safe
 	end
 
 	def btn_submit(prepend = '')
@@ -53,36 +55,47 @@ module ApplicationHelper
 	end
 
 	def user_navigation
-		return build_hash(get_hash)
+		return build_navigation(get_hash)
 	end
 
 	private
 
-		def build_hash(hash)			
-			html = ''
+		def build_navigation(hash, menu = '')
+			# Verifica se é um menu valido e inicia a lista de itens
+			html = menu.empty? ? "" : "<ul class='sub-menu collapse' 
+																	id='#{menu.pluralize}'>"		
+			
+			build_page = -> (page) { "<li>#{page}</li>" }
+			# Percorre o hash em busca da lista de paginas
 			hash.each do |key, value|
-				if key == :pages
-					if !hash[:pages].empty?
-						hash[:pages].each do |page|
-							html += "<li>" 
-							html += sidebar_link( page.icon, page.name, send(page.path)) 
-							html += "</li>"
-						end
-					end
+				# Verifica se a chave é :pages e se array de paginas não está vazio
+				if key == :pages && !hash[:pages].empty?
+					hash[:pages].each do |p| 
+						html += build_page.call(sidebar_link(p.icon, p.name, send(p.path)))
+					end					
 				end
 			end
 
+			# Percorre o hash em busca dos demais itens
 			hash.each do |key, value|
+				# Verifica se a chave não é um icone ou um array de paginas
 				if key != :icon && key != :pages
-					html += '<li data-toggle="collapse" data-target="#management" class="collapsed">'
-          html += sidebar_link('wrench', 'Management')
+					title = key.to_s
+          html += menu_item(key, sidebar_link(value[:icon], title.titleize))
           #Inicia processo de recurssão
-					html += build_hash(hash[key])				
-        	html += '</li>'
+					html += build_navigation(hash[key], title)
 				end
 			end
+
+			# Verifica se é um menu valido e fecha a lista de itens			
+			html += menu.empty? ? '' : '</ul>'			
 
 			return html.html_safe
+		end
+
+		def menu_item(key, menu)
+			"<li class='collapsed' data-target='##{key.to_s.pluralize}' 						
+						data-toggle='collapse'>#{menu}</li>"
 		end
 
 		# Construtor do hash de menus
@@ -91,15 +104,14 @@ module ApplicationHelper
 		
 			# Recupera as paginas que não pertencem a nenhum menu especifico,
 			# mas pertencem ao perfil do usuario atual
-			loose = []
+			hash[:pages] = []
 			acc = "SELECT page_id FROM accesses WHERE role_id = :role_id"
 			pages = Page.where("id IN (#{acc}) AND menu_id IS NULL", 
 													role_id: current_user.role.id)
 			pages.each do |page|					
-				loose.push(page)
+				# Adiciona o array de paginas avulsas no hash
+				hash[:pages].push(page)
 			end
-			# Adiciona o array de paginas avulsas no hash
-			hash[:pages] = loose
 
 			# Percorre todos os menus
 			Menu.where(parent_id: nil).each do |menu|
@@ -111,7 +123,7 @@ module ApplicationHelper
 		end
 
 		# Método recursivo de contrução de menus
-		def build_menu_hash(hash, menu)
+		def build_menu_hash(hash, menu)			
 			sym = str_to_sym(menu.name) # Conversão do nome do menu em simbolo
 			# Inicializa o hash do menu, utilizando o nome como chave
 			hash[sym] = {}

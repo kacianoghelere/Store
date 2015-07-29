@@ -34,7 +34,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :menu_id, "Role", 
+    <%= f.label :menu_id, "Menu", 
                             class: "col-sm-offset-2 col-sm-2 control-label" %>
     <div class="col-sm-4">
       <%= collection_select(:menu, :menu_id, Menu.all, :id, :name, 
