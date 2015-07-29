@@ -32,6 +32,44 @@
     </div>
   <% end %>
 
+  <div class="row">
+    <div class="col-sm-10">
+      <table class="table table-bordered table-striped table-resposive">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Path</th>
+            <th width="5%">Create</th>
+            <th width="5%">Read</th>
+            <th width="5%">Update</th>
+            <th width="5%">Destroy</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @accesses.each do |access| %>
+            <tr>
+              <td><%= link_to access.page.name, access.page %></td>
+              <td><%= access.page.path %></td>
+              <td align="center">
+                <%= render_checkbox "create",  access.can_create  %>
+              </td>
+              <td align="center">
+                <%= render_checkbox "read",    access.can_read    %>
+              </td>
+              <td align="center">
+                <%= render_checkbox "update",  access.can_update  %>
+              </td>
+              <td align="center">
+                <%= render_checkbox "destroy", access.can_destroy %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
 </div>
 
 <div class="row row-margin">

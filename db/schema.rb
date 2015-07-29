@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 20150728171725) do
   create_table "accesses", force: :cascade do |t|
     t.integer  "role_id"
     t.integer  "page_id"
-    t.boolean  "can_create"
-    t.boolean  "can_read"
-    t.boolean  "can_update"
-    t.boolean  "can_destroy"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "can_create",  default: false
+    t.boolean  "can_read",    default: false
+    t.boolean  "can_update",  default: false
+    t.boolean  "can_destroy", default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "accesses", ["page_id"], name: "index_accesses_on_page_id"

@@ -16,7 +16,8 @@ class RolesController < ApplicationController
       @assosciated_users = "None"
     else
       @assosciated_users = @role.users.map(&:name).join(", ")
-    end
+    end    
+    @accesses = Access.where(role_id: @role)
   end
 
   # GET /roles/new
@@ -30,11 +31,13 @@ class RolesController < ApplicationController
 
   # POST /roles
   # POST /roles.json
-  def create
+  def create    
     @role = Role.new(role_params)
 
     respond_to do |format|
       if @role.save
+        pages = params[:role][:pages]
+        create_access(@role, pages)
         format.html { redirect_to @role, notice: 'Role was successfully created.' }
         format.json { render :show, status: :created, location: @role }
       else
@@ -49,6 +52,8 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
+        pages = params[:role][:pages]
+        create_access(@role, pages)
         format.html { redirect_to @role, notice: 'Role was successfully updated.' }
         format.json { render :show, status: :ok, location: @role }
       else
@@ -77,5 +82,15 @@ class RolesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
       params.require(:role).permit(:name, :description, :admin, :manager)
+    end
+
+    # Cria o vinculo entre o perfil e as telas selecionadas, deleta anteriores
+    def create_access(role, pages)
+      role.accesses.destroy_all
+      pages.each do |p|
+        if !p.empty?
+          role.accesses.create({role_id: role, page_id: p.to_i})
+        end
+      end
     end
 end

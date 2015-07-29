@@ -22,6 +22,14 @@ module ApplicationHelper
 		("<i class='glyphicon glyphicon-#{icon}'></i> #{text}").html_safe
 	end
 
+	def render_checkbox(name, value)
+		if value.nil? || value.empty?
+			value = false
+		end
+		"<input type='checkbox' name='#{name}' checked='#{value}' 
+						disabled readonly>".html_safe
+	end
+
 	def btn_submit(prepend = '')
 		"#{prepend} btn btn-primary btn-sm"
 	end
