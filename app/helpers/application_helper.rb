@@ -60,6 +60,11 @@ module ApplicationHelper
 		string.gsub(/\s+/,"_").downcase.to_sym
 	end
 
+	# Converte string 'true' ou 'false' para boolean
+	def to_boolean(str)
+	  str == 'true'
+	end
+
 	def user_navigation
 		return build_navigation(get_hash)
 	end

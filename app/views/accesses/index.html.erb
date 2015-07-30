@@ -49,13 +49,12 @@
 <div class="row row-margin">
   <% if can? :manage, Access %>
   	<%= form_for(:accesses, url: save_accesses_path) do |f| %>
+      <%= f.hidden_field :json_data, value: "" %>
     	<%= f.submit 'Save', class: btn_create %>
-    	<%= link_to 'Teste', '#', id: 'frash' %>
   	<% end %>
   <% end %>
-
 </div>
-
+<!--  -->
 <script type="text/javascript">
 	$(function (){
 		var getJsonFromTable = function() {
@@ -63,7 +62,7 @@
 			$('#accesses tbody tr').each(function(i, n){
 				var $row = $(n);
 				rows.push({
-					access_id: $row.attr('id'),
+					access_id: $row.attr('id').split(/_/)[1],
 					role_id:   $row.find('td:eq(0)').data('code'),
 					page_id:   $row.find('td:eq(1)').data('code'),
 					create:    $row.find('td:eq(3) input[type=checkbox]').prop('checked'), 
@@ -80,11 +79,11 @@
     });
 
     $('form').submit(function(event) {
-    	var table = {"accesses": getJsonFromTable()};
-    	var data = $(this).serialize();
-    	data += '&accesses=' + JSON.stringify(table);
-    	$.post($(this).attr('action'), data, null, "script");
-    	// return false;
+    	var table = getJsonFromTable();
+    	$('input[name="accesses[json_data]"]').val(table);
+    	if ($('input[name="accesses[json_data]"]').val() == '') {
+        return false;
+      };
     });
 	});
 </script>
