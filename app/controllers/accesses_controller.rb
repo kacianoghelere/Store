@@ -7,11 +7,11 @@ class AccessesController < ApplicationController
   end
 
   def create
-  	hash = access_params    
+  	hash = access_params
   	update(hash)
   	redirect_to accesses_path
   end
-  #can_create: true, can_read: true, can_update: true, can_destroy: true
+
   def update(accesses)
     # puts "HASH: #{accesses}"
     accesses.each do |access|
@@ -27,14 +27,14 @@ class AccessesController < ApplicationController
         can_destroy: access['destroy']
       }
       acc = Access.find_by(find_hash)
-      acc.update_attributes(update_hash);      
+      acc.update_attributes(update_hash);
     end
   end
 
   private
   	def access_params
       json_string = params[:accesses][:json_data]
-  		hash = !json_string.empty? ? JSON.parse(json_string) : {}      
+  		hash = !json_string.empty? ? JSON.parse(json_string) : {}
       return hash
   	end
 
