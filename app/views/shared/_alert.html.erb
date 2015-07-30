@@ -1,0 +1,9 @@
+<% flash.each do |type, message| %>
+	<div class="alert <%= alert_for(type) %>">
+		<button type="button" class="close" 
+			data-dismiss="alert" aria-hidden="true">&times;</button>
+		<p>
+			<b><%= content_tag(:div, message) %></b>
+		</p>
+	</div>
+<% end %> 

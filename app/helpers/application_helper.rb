@@ -9,6 +9,15 @@ module ApplicationHelper
 		"#{title} | Store"
 	end
 
+	def alert_for(flash_type)		
+		{
+			success: "alert-success", 
+			error:   "alert-danger", 
+			alert:   "alert-warning", 
+			notice:  "alert-info" 
+		}[flash_type.to_sym] || flash_type.to_s
+	end
+
 	# CUSTOM
 	def sidebar_link(icon, text = '', path = '#')
 		link_to(link_icon_sidebar(icon, text), path)
@@ -62,7 +71,7 @@ module ApplicationHelper
 
 	# Converte string 'true' ou 'false' para boolean
 	def to_boolean(str)
-	  str == 'true'
+		str == 'true'
 	end
 
 	def user_navigation
@@ -74,7 +83,7 @@ module ApplicationHelper
 		def build_navigation(hash, menu = '')
 			# Verifica se é um menu valido e inicia a lista de itens
 			html = menu.empty? ? "" : "<ul class='sub-menu collapse' 
-																	id='#{menu.pluralize}'>"		
+																	id='#{menu.pluralize}'>"
 			
 			build_page = -> (page) { "<li>#{page}</li>" }
 			# Percorre o hash em busca da lista de paginas
@@ -83,7 +92,7 @@ module ApplicationHelper
 				if key == :pages && !hash[:pages].empty?
 					hash[:pages].each do |p| 
 						html += build_page.call(sidebar_link(p.icon, p.name, send(p.path)))
-					end					
+					end
 				end
 			end
 
@@ -92,20 +101,20 @@ module ApplicationHelper
 				# Verifica se a chave não é um icone ou um array de paginas
 				if key != :icon && key != :pages
 					title = key.to_s
-          html += menu_item(key, sidebar_link(value[:icon], title.titleize))
-          #Inicia processo de recurssão
+					html += menu_item(key, sidebar_link(value[:icon], title.titleize))
+					#Inicia processo de recurssão
 					html += build_navigation(hash[key], title)
 				end
 			end
 
-			# Verifica se é um menu valido e fecha a lista de itens			
-			html += menu.empty? ? '' : '</ul>'			
+			# Verifica se é um menu valido e fecha a lista de itens
+			html += menu.empty? ? '' : '</ul>'
 
 			return html.html_safe
 		end
 
 		def menu_item(key, menu)
-			"<li class='collapsed' data-target='##{key.to_s.pluralize}' 						
+			"<li class='collapsed' data-target='##{key.to_s.pluralize}'
 						data-toggle='collapse'>#{menu}</li>"
 		end
 
@@ -119,7 +128,7 @@ module ApplicationHelper
 			acc = "SELECT page_id FROM accesses WHERE role_id = :role_id"
 			pages = Page.where("id IN (#{acc}) AND menu_id IS NULL", 
 													role_id: current_user.role.id)
-			pages.each do |page|					
+			pages.each do |page|
 				# Adiciona o array de paginas avulsas no hash
 				hash[:pages].push(page)
 			end
@@ -134,7 +143,7 @@ module ApplicationHelper
 		end
 
 		# Método recursivo de contrução de menus
-		def build_menu_hash(hash, menu)			
+		def build_menu_hash(hash, menu)
 			sym = str_to_sym(menu.name) # Conversão do nome do menu em simbolo
 			# Inicializa o hash do menu, utilizando o nome como chave
 			hash[sym] = {}
@@ -156,7 +165,7 @@ module ApplicationHelper
 				arr = []
 				# Percorre as paginas encontradas e adiciona no hash de menus
 				# usando o nome do menu como chave 
-				pages.each do |page|					
+				pages.each do |page|
 					arr.push(page)
 				end
 				hash[sym][:pages] = arr

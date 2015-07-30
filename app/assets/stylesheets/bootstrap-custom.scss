@@ -47,6 +47,15 @@ div.content {
   -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.25), 0 2px 2px 0 rgba(0,0,0,0.25);
   -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.25), 0 2px 2px 0 rgba(0,0,0,0.25); 
 }
+div.debug {  
+  margin: 5px 15px;
+  padding: 15px;  
+
+}
+div.debug > .debug_dump {
+  background-color: $gray_darker;
+  color: $brand-success;
+}
 
 #login-nav input { 
   margin-bottom: 15px;

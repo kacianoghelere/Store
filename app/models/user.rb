@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :items
   validates_presence_of :name
+  validates :role_id, presence: true
 	before_save :assign_role
 
 	def assign_role
