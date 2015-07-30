@@ -74,6 +74,10 @@
 <div class="row row-margin">
   <%= link_to link_icon('arrow-left', 'Back'), roles_path, 
                                                 	class: btn_show('left')  %>
-  <%= link_to link_icon('edit', 'Edit'), edit_role_path(@role), 
+  <% if can? :manage, Access %>
+    <%= link_to link_icon('check', 'Manage Access'), accesses_path, 
                                                   class: btn_show('right') %>
+  <% end %>
+  <%= link_to link_icon('edit', 'Edit'), edit_role_path(@role), 
+                                                  class: btn_edit('right') %>
 </div>

@@ -1,40 +1,43 @@
 <%= provide(:title, 'Menus') %>
 <p id="notice"><%= notice %></p>
-
-<div class="col-sm-12">
-  <table class="table table-hover table-bordered table-striped table-resposive">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Parent</th>
-        <th>Icon</th>
-        <th colspan="2" width="10%"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @menus.each do |menu| %>
+<div class="row row-margin">
+  <div class="col-sm-12">
+    <table class="table table-hover table-striped table-resposive">
+      <thead>
         <tr>
-          <td><%= link_to menu.name, menu %></td>
-          <td><%= menu.get_parent %></td>
-          <td><%= link_icon(menu.icon, menu.icon) %></td>
-          <td>
-            <%= link_to link_icon('edit'), edit_menu_path(menu), 
-                                            class: btn_edit %>
-          </td>
-          <td>
-            <%= link_to link_icon('remove'), menu, method: :delete, 
+          <th>Name</th>
+          <th>Parent</th>
+          <th>Icon</th>
+          <th colspan="2" width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @menus.each do |menu| %>
+          <tr>
+            <td><%= link_to menu.name, menu %></td>
+            <td><%= menu.get_parent %></td>
+            <td><%= link_icon(menu.icon, menu.icon) %></td>
+            <td>
+              <%= link_to link_icon('edit'), edit_menu_path(menu), 
+                                              class: btn_edit %>
+            </td>
+            <td>
+              <%= link_to link_icon('remove'), menu, method: :delete, 
                                             data: { confirm: 'Are you sure?' },
                                             class: btn_destroy %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div class="row row-margin">
-  <% if can? :manage, Role %>
-    <%= link_to link_icon('plus', 'New Menu'), new_menu_path, 
-                                                class: btn_create %>
-  <% end %>
+  <div class="col-sm-12">
+    <% if can? :manage, Role %>
+      <%= link_to link_icon('plus', 'New Menu'), new_menu_path, 
+                                                  class: btn_create %>
+    <% end %>
+  </div>
 </div>

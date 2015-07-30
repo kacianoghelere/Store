@@ -4,6 +4,19 @@
 
 <div class="row row-margin">
   <div class="col-sm-12">
+    <%= form_for(:role, html: {class: "form-horizontal"}) do |f| %>
+      <div class="form-group">
+        <div class="col-sm-4">
+          <%= collection_select(:user, :role_id, Role.all, :id, :name, 
+                    {prompt: true}, class: "form-control input-sm") %>
+        </div>       
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row row-margin">
+  <div class="col-sm-12">
     <table id="accesses" class="table table-bordered table-resposive">
       <thead>
         <tr>
@@ -47,12 +60,14 @@
 </div>
 
 <div class="row row-margin">
-  <% if can? :manage, Access %>
-  	<%= form_for(:accesses, url: save_accesses_path) do |f| %>
-      <%= f.hidden_field :json_data, value: "" %>
-    	<%= f.submit 'Save', class: btn_create %>
-  	<% end %>
-  <% end %>
+  <div class="col-sm-12">
+    <% if can? :manage, Access %>
+    	<%= form_for(:accesses, url: save_accesses_path) do |f| %>
+        <%= f.hidden_field :json_data, value: "" %>
+      	<%= f.submit 'Save', class: btn_create %>
+    	<% end %>
+    <% end %>
+  </div>
 </div>
 <!--  -->
 <script type="text/javascript">
