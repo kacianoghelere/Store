@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, 
-                      notice: 'User was successfully created.' }
+                      notice: 'User was created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
    
     respond_to do |format|
       if successfully_updated
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'User was updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -77,8 +77,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, 
-                    notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was destroyed.' }
       format.json { head :no_content }
     end
   end

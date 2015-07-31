@@ -18,8 +18,10 @@
             <td><%= menu.get_parent %></td>
             <td><%= link_icon(menu.icon, menu.icon) %></td>
             <td>
-              <%= link_to link_icon('edit'), edit_menu_path(menu), 
+              <% if role_can?(:edit, 'Menus') %>
+                <%= link_to link_icon('edit'), edit_menu_path(menu), 
                                               class: btn_edit %>
+              <% end %>
             </td>
             <td>
               <%= link_to link_icon('remove'), menu, method: :delete, 

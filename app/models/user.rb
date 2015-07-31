@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 	before_save :assign_role
 
 	def assign_role
-	  self.role = Role.find_by name: "Regular" if self.role.nil?
+	  self.role ||= Role.find_by(admin: false, manager: false).take(1) 
 	end
 
   def admin?
@@ -24,5 +24,7 @@ class User < ActiveRecord::Base
   def regular?
     !self.role.admin? && self.role.manager?
   end
-  
+  def last_login
+    self.current_sign_in_at.to_formatted_s(:last_login)
+  end
 end
