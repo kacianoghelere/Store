@@ -79,12 +79,11 @@ module ApplicationHelper
 	end
 
 	def role_can?(action, page_name)
-		# 	acc = "SELECT page_id FROM accesses WHERE role_id = :role_id"
-		# 	pages = Page.where("id IN (#{acc}) AND menu_id IS NULL", 
-		# 											role_id: current_user.role.id)
-															
-		# page = Page.where(name: page_name).take(1);
-		# current_user.role.accesses.where(page_id: page.id, action: true)
+		access = Access.where(role_id: current_user.role.id)
+		acc	= access.joins(:page).where(pages: { name: page_name })
+		eval = eval_action(action)
+		key = eval[:operation]
+		return acc[0][key]
 	end
 
 	def user_navigation
@@ -92,6 +91,27 @@ module ApplicationHelper
 	end
 
 	private
+		def eval_action(action)
+		  case action.to_s
+		  when "create", "new"
+		    operation = :can_create
+		    field = 'can_create'
+		  when "index", "show", "search"
+		    operation = :can_read
+		    field = 'can_read'
+		  when "edit", "update"
+		    operation = :can_update
+		    field = 'can_update'
+		  when "delete", "destroy"
+		    operation = :can_destroy
+		    field = 'can_destroy'
+		  else
+		    operation = nil
+		    field = ''
+		  end
+		  return {operation: operation, field: field}
+		end
+
 		def build_navigation(hash, menu = '')
 			# Verifica se é um menu valido e inicia a lista de itens
 			html = menu.empty? ? "" : "<ul class='sub-menu collapse' 
