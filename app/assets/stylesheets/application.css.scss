@@ -14,11 +14,11 @@
  */
 @import "bootstrap-sprockets";
 /* Import cerulean variables */
-@import "bootswatch/yeti/variables"; 
+@import "bootswatch/paper/variables"; 
 @import "bootstrap";
 /*@import "bootstrap/theme"; */
 /* And finally bootswatch style itself */
-@import "bootswatch/yeti/bootswatch"; 
+@import "bootswatch/paper/bootswatch"; 
 
 @import "bootstrap-multiselect";
 @import "bootstrap-custom";

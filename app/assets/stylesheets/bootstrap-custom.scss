@@ -3,7 +3,7 @@ body {
   width: 100%;
 }
 body > div.side {
-  width: 15%;
+  width: 17%;
   margin: 0;
   padding: 0; 
   float:left;
@@ -15,19 +15,20 @@ body > div.non_authenticated {
   float:left;
 }
 body > div.authenticated {    
-  width: 85%;
-  margin-left: 15%;
+  width: 83%;
+  margin-left: 17%;
   margin-bottom: 10px;
   float: left;
   height: auto;
 }
 body > div.authenticated .navbar {
-  width: 85%;  
+  width: 83%;  
   position: fixed;
+  border-radius: 0;
   z-index: 9;
 }
 body > div.authenticated>.container {
-  padding-top: 50px;
+  padding-top: 70px;
 }
 body > div.container {
   width: 100%;
@@ -68,6 +69,19 @@ ul.dropdown-menu.login-dropdown {
   padding: 10px; 
   min-width: 300px;
 }
+.user-identification {
+  vertical-align: top;
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  height: 64px;
+}
+.user-identification .user-detail {  
+  margin: 0;
+  padding: 0;
+  height: 40%;
+}
+
 
 @media (min-width: 1200px) {
   /* line 10, /home/kaciano/.rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
@@ -145,24 +159,29 @@ a.link-sm {
   background-color: $gray_dark;
   position: fixed;
   top: 0px;
-  width: 15%;
+  width: 17%;
   height: 100%;
   color: $gray-lighter;
 }
 .nav-side-menu .brand {
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   background-color: darken($brand-primary, 10%);
-  line-height: 45px;
-  display: block;
+  line-height: 64px;
   text-align: center;
   font-size: 13px;
-}
-.nav-side-menu .brand a {
-  display:block;
-  color: $gray-lighter;
-  font-weight: bold;
   padding: 0;
   margin: 0;
+}
+.nav-side-menu .brand a {
+  // display:block;
+  color: lighten($brand-primary, 30%);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+.nav-side-menu .brand a:hover {
+  color: lighten($brand-primary, 40%);
 }
 .nav-side-menu .toggle-btn {
   display: none;

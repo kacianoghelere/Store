@@ -1,6 +1,17 @@
 <div class="nav-side-menu">
   <div class="brand">
-    <%= sidebar_link 'home', 'Home', authenticated_root_path %>
+    <div class="row row-margin">
+      <div class="col-sm-12">
+        <div class="col-sm-3 user-identification">
+          <%= link_to gravatar_for( current_user, size: "50"), current_user %>
+        </div>
+        <div class="col-sm-9 user-identification" style="margin: 0; padding: 0;">        
+          <%= sidebar_link('', 
+              "#{current_user.first_name} | #{current_user.role.name}".html_safe, 
+                                    path = current_user) %>          
+        </div>
+      </div>
+    </div>
   </div>
   <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" 
     data-target="#menu-content"></i>  

@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   validates :role_id, presence: true
 	before_save :assign_role
 
+  def first_name
+    self.name.split(" ")[0]
+  end
+
 	def assign_role
 	  self.role ||= Role.find_by(admin: false, manager: false).take(1) 
 	end
