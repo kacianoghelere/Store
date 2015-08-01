@@ -58,12 +58,16 @@ div.debug > .debug_dump {
   color: $brand-success;
 }
 
-#login-nav input { 
+#login-nav { 
+  margin-bottom: 15px;
+}
+#login-nav input[type="text"] { 
+  color: #000;
   margin-bottom: 15px;
 }
 
 .remember-label {
-  color: #FFF;
+  // color: #FFF;
 }
 ul.dropdown-menu.login-dropdown {
   padding: 10px; 
