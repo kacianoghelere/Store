@@ -86,6 +86,12 @@ ul.dropdown-menu.login-dropdown {
   height: 40%;
 }
 
+.navbar-inverse input[type="email"].form-control,
+.navbar-inverse input[type="search"].form-control,
+.navbar-inverse input[type="password"].form-control,
+.navbar-inverse input[type="text"].form-control {
+  color: #444;
+}
 
 @media (min-width: 1200px) {
   /* line 10, /home/kaciano/.rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
